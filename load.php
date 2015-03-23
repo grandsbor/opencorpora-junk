@@ -1,17 +1,17 @@
 <?php
 exit;
 require_once('lib/header.php');
+if (!is_admin())
+    exit;
 
-//$arr = file('/home/grand/news_2011_08_29.txt');
-$arr = file('/corpus/lj-posts-random-100.txt');
+$arr = file('/home/grand/2014_articles.txt');
 
+$ins = sql_prepare("INSERT INTO sources VALUES(NULL, ?, ?, '', '0', '0')");
 foreach ($arr as $s) {
-    list($p, $year, $month, $url) = explode("\t", $s);
+    list($url, $date) = explode("\t", $s);
     //$url = 'http://www.chaskor.ru/news/'.$url;
     $url = 'http://'.$url;
-    if (!sql_query("INSERT INTO sources VALUES(NULL, '17674', '".mysql_real_escape_string(trim($url))."', '', '0', '0')")) {
-        print "Fail!<br/>";
-    }
+    sql_execute($ins, array(20080, trim($url)));
 }
 print "ok";
 ?>
