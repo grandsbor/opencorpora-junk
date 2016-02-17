@@ -2,13 +2,21 @@
 import sys
 import re
 
-ONLY_POS = False
+ONLY_POS = 1
+NO_SPEC = 2
+ALL = 3
+
+MODE = ALL
 
 def signature(var_xml):
     res = re.findall('<g v="([^"]+)"', var_xml)
     gram = []
     for g in res:
-        if (ONLY_POS and re.match('^[A-Z]+$', g)) or (not ONLY_POS and not re.match('[A-Z][^A-Z]', g)):
+        if (
+            MODE == ALL
+            or (MODE == ONLY_POS and re.match('^[A-Z]+$', g))
+            or (MODE == NO_SPEC and not re.match('[A-Z][^A-Z]', g))
+        ):
             gram.append(g)
 
     return '&'.join(sorted(gram))
@@ -30,6 +38,7 @@ for l in open(sys.argv[1]):
         signs.add(signature(v))
 
     if len(signs) < 2:
+        print(l)
         continue
 
     signs_str = '@'.join(sorted(signs))
