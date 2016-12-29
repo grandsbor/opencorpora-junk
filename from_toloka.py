@@ -35,8 +35,8 @@ def find_slot_for_answer(token_id):
         AND answer = 0
     """.format(token_id), True)
     if rows:
-        print(row[0]['instance_id'])
-        return row[0]['instance_id']
+        print(rows[0]['instance_id'])
+        return rows[0]['instance_id']
     return None
 
 def try_insert(token_id, user_id, answer):
@@ -58,7 +58,7 @@ def add_from_tsv(path):
 
 def main():
     add_from_tsv(sys.argv[1])
-    #EDITOR.commit()
+    EDITOR.commit()
 
 if __name__ == "__main__":
     main()
