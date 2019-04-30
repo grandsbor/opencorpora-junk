@@ -31,7 +31,7 @@ sub get_word_form_noun_n_ina_7a {
     my $form_regexp = "сущ ru n ina 7a";    # название шаблона из викисловаря
     my $type = "NOUN,inan,neut";            # тип слова
 
-    my $ends_sing = "ие,ия,ию,ие,ием,ииx";  # окончания един. числа
+    my $ends_sing = "ие,ия,ию,ие,ием,ии";  # окончания един. числа
     my $ends_plur = "ия,ий,иям,ия,иями,иях";# окончания множ. числа
     
     get_word_form_noun($diff_wiki, $dir, $unkn_text, $form_name, $form_regexp, $type, $ends_sing, $ends_plur);
